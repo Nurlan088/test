@@ -1,0 +1,20 @@
+---
+- hosts: servers
+  gather_facts: yes
+  remote_user: nurlan
+  become_user: root
+  become: true
+  become_method: su
+  tasks:
+
+  - name: vm-toolsun yuklenmesi
+    yum:
+      name: open-vm-tools
+      state: latest
+
+  - name: vm-tools-un ise salinmasi
+    service:
+      name: vmtoolsd
+      state: restarted
+      enabled: yes
+
